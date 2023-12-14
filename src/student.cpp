@@ -28,6 +28,10 @@ void controllerTick (Overlord &over)
 
 
     float u = button * over.getSlider(SliderEnum::prog1)*1.0 / 1000 ;
+
+    Serial.print(u);
+    Serial.print(' ');
+    Serial.println(motorVel);
     
     over.setMotorU (u);
 }
