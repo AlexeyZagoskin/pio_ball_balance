@@ -21,17 +21,26 @@ void controllerTick (Overlord &over)
     float carX = -over.getCarX ();
     float carVel = -over.getCarVel ();
     float motorAngle = over.getMotorTheta ();
-    float motorVel = over.getMotorVel ();
+    float w = over.getMotorVel ();
 
     bool button = !digitalRead(13);
 
 
 
-    float u = button * over.getSlider(SliderEnum::prog1)*1.0 / 1000 ;
+    float w0 = button * over.getSlider(SliderEnum::prog1)*1.0 / 1000 ;
 
+    float err = w0 - w;
+
+    float k = 0.45;
+    float kp = 9.87;
+
+    float u = kp * err;
+
+    Serial.print(w0);
+    Serial.print(' ');
     Serial.print(u);
     Serial.print(' ');
-    Serial.println(motorVel);
+    Serial.println(w);
     
     over.setMotorU (u);
 }
