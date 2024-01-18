@@ -36,7 +36,7 @@ void controllerTick (Overlord &over)
 
     if (-12 < u && u < 12 || I * e < 0)
     {
-        float dI = over.getTs() * Ki * e;
+        float dI = over.getTs() * Ki * e ;
         I = I + dI;
     }
 
