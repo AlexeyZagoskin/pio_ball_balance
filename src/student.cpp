@@ -27,20 +27,27 @@ void controllerTick (Overlord &over)
 
     float e = w0 - motorVel;
 
+    float Tm = 6;
+    float T1 = 35;
+    float K = 0.68;
+
+
     static float I = 0;
     static constexpr float Ki = 7;
     static constexpr float Kp = 1;
+    float Kk = T1 / (2 * K * Tm);
 
 
-    float u = I + Kp * e;
+    float u = I + Kp * e * Kk;
 
-    if (-12 < u && u < 12 || I * e < 0)
+    if (-10 < u && u < 10 || I * e < 0)
     {
-        float dI = over.getTs() * Ki * e ;
+        float dI = over.getTs() * Ki * e * Kk;
         I = I + dI;
     }
 
-    u = constrain(u, -12, 12);
+    u = constrain(u, -10, 10);
+    
 
 
 
