@@ -25,15 +25,21 @@ void controllerTick (Overlord &over)
 
     float w0 = over.getSlider(SliderEnum::prog1) * 1.0 / 1000;
 
-    float Kp = 1;
+    float Ki = 4;
+    float Ts = 0.6;
+    float I = 0; 
 
     float e = w0 - w;
+    float eKi = e * Ki;
+    float dI = eKi * Ts;
 
-    float u = 1 * Kp * e;
+    I = I + dI;
+
+    float u = I;
 
     Serial.print(w0);
     Serial.print(' ');
-    Serial.println(w);
+    Serial.println(u);
     
     over.setMotorU (u);
 }
