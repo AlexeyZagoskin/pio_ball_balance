@@ -29,7 +29,7 @@ void controllerTick (Overlord &over)
 
     float e = w0 - w;
 
-    float u = Kp * e;
+    float u = 1 * Kp * e;
 
     Serial.print(w0);
     Serial.print(' ');
